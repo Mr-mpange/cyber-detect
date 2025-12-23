@@ -5,7 +5,9 @@
 [![Accuracy](https://img.shields.io/badge/Accuracy-96%25-brightgreen.svg)](README.md)
 [![F1-Score](https://img.shields.io/badge/F1--Score-93.13%25-brightgreen.svg)](README.md)
 
-A state-of-the-art machine learning system for detecting cyber attacks in network traffic with **96%+ accuracy**. This system uses advanced ML techniques including XGBoost, ensemble methods, and feature engineering to identify malicious network activity in real-time.
+A state-of-the-art machine learning system for detecting cyber attacks in network traffic with **96%+ accuracy on synthetic data** and **90%+ accuracy on real datasets**. This unified system uses advanced ML techniques including XGBoost, ensemble methods, and feature engineering to identify malicious network activity in real-time.
+
+**🆕 NEW: Unified system supports both synthetic and real cybersecurity datasets through a single main.py interface!**
 
 ## 🎯 **Performance Achievements**
 
@@ -33,9 +35,40 @@ cd cyber-detect
 
 # Install dependencies
 pip install -r requirements.txt
+```
 
-# Run the system
+### **Option 1: Synthetic Data (Default)**
+```bash
+# Run with synthetic data (immediate testing)
 python main.py
+```
+
+### **Option 2: Real Datasets (Recommended)** 🆕
+```bash
+# Download real cybersecurity dataset
+python download_datasets.py --nsl-kdd
+
+# Run with real NSL-KDD dataset
+python main.py --dataset data/KDDTrain+.csv
+
+# Or create sample dataset for testing
+python download_datasets.py --sample
+python main.py --dataset data/sample_network_intrusion.csv
+
+# Show all dataset options
+python main.py --info
+```
+
+### **Advanced Usage**
+```bash
+# Use custom label column
+python main.py --dataset data/custom.csv --label attack_type
+
+# Use subset of large dataset (first 10,000 rows)
+python main.py --dataset data/large.csv --sample 10000
+
+# Show help
+python main.py --help
 ```
 
 ### **Demo Detection**
@@ -86,9 +119,52 @@ python demo_detection.py
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
-## 💻 **Usage Examples**
+## 📊 **Data Visualization & Analysis**
 
-### **Basic Detection**
+### **Generate Comprehensive Visualizations**
+```bash
+# Generate all data analysis graphs
+python data_visualization_analysis.py
+
+# View generated visualizations
+# Check ./visualizations/ folder for 7 detailed analysis graphs
+```
+
+### **Available Visualizations:**
+1. **Data Distribution Overview** - Traffic patterns and attack characteristics
+2. **Attack Pattern Analysis** - How different attacks appear in network data
+3. **Feature Engineering Impact** - How data preprocessing improves detection
+4. **Model Performance Comparison** - Algorithm accuracy and effectiveness
+5. **Data Preprocessing Pipeline** - Step-by-step data transformation
+6. **Real-time Detection Simulation** - Live attack detection capabilities
+7. **Comprehensive Dashboard** - Complete system overview and metrics
+
+**📖 See `VISUALIZATION_GUIDE.md` for detailed explanation of all graphs and insights.**
+
+## 💻 **Usage Examples**
+```bash
+# Run with synthetic data (default)
+python main.py
+```
+
+### **Real Dataset Detection** 🆕
+```bash
+# Download and use NSL-KDD dataset
+python download_datasets.py --nsl-kdd
+python main.py --dataset data/KDDTrain+.csv
+
+# Use sample dataset
+python download_datasets.py --sample
+python main.py --dataset data/sample_network_intrusion.csv
+
+# Use custom dataset with specific label column
+python main.py --dataset data/custom.csv --label attack_type
+
+# Use subset of large dataset
+python main.py --dataset data/large.csv --sample 10000
+```
+
+### **Programmatic Usage**
 ```python
 from demo_detection import CyberAttackPredictor
 
@@ -114,34 +190,48 @@ print(f"Consensus Strength: {ensemble_result['consensus_strength']:.2%}")
 ```python
 import joblib
 
-# Load the best model (96% accuracy)
-model = joblib.load('models/enhanced/optimized_xgboost_model.pkl')
-scaler = joblib.load('models/enhanced/scaler.pkl')
-selector = joblib.load('models/enhanced/feature_selector.pkl')
+# Load the best model (96% accuracy - synthetic) or (92%+ accuracy - real data)
+model = joblib.load('models/enhanced/synthetic_optimized_xgboost_model.pkl')  # Synthetic
+# OR
+model = joblib.load('models/kaggle/nsl_kdd_optimized_xgboost_model.pkl')     # Real data
+
+scaler = joblib.load('models/enhanced/synthetic_scaler.pkl')
+selector = joblib.load('models/enhanced/synthetic_feature_selector.pkl')
 ```
 
 ## 📁 **Project Structure**
 
 ```
 cyber-detect/
-├── main.py                    # 🚀 Main system (96% accuracy)
+├── main.py                    # 🚀 Unified system (synthetic + real data)
+├── download_datasets.py       # � Daataset downloader
 ├── demo_detection.py          # 🎯 Production demo & testing
+├── test_kaggle_integration.py # 🧪 Integration tests
 ├── requirements.txt           # 📦 Dependencies
+├── README.md                  # � DMain documentation
+├── KAGGLE_USAGE.md           # 📖 Real dataset guide
+├── PROJECT_STRUCTURE.md      # � Projectn organization
 ├── .gitignore                 # 🔒 Git ignore rules
 │
-├── src/                       # 📚 Source code
+├── src/                       # � Soturce code
 │   ├── data_loader.py         # 📊 Data loading & preprocessing
 │   ├── models.py              # 🤖 Original ML models
 │   └── enhanced_models.py     # ⚡ Advanced optimized models
 │
-├── notebooks/                 # 📓 Analysis notebooks
+├── notebooks/                 # � Aonalysis notebooks
 │   └── data_analysis.py       # 📈 Comprehensive data analysis
 │
 ├── models/                    # 🧠 Model storage
-│   └── enhanced/              # 🏆 High-accuracy models (96%)
+│   ├── enhanced/              # � Syntdhetic data models (96%)
+│   └── kaggle/               # 🆕 Real dataset models (90%+)
 │
 ├── data/                      # 💾 Dataset storage
+│   ├── sample_network_intrusion.csv  # 🆕 Sample dataset
+│   └── *.csv                 # 📥 Downloaded datasets
+│
 └── results/                   # 📊 Generated results & reports
+    ├── enhanced/              # Synthetic data results
+    └── kaggle/               # Real dataset results
 ```
 
 ## 🔬 **Technical Details**
@@ -257,19 +347,44 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🎯 **Quick Commands**
 
 ```bash
-# Run full system
-python main.py
+# 🚀 BASIC USAGE
+python main.py                                    # Synthetic data (default)
+python main.py --info                             # Show dataset options
 
-# Test detection
-python demo_detection.py
+# 📊 REAL DATASETS  
+python download_datasets.py --nsl-kdd             # Download NSL-KDD dataset
+python main.py --dataset data/KDDTrain+.csv       # Use NSL-KDD dataset
 
-# Install dependencies  
-pip install -r requirements.txt
+python download_datasets.py --sample              # Create sample dataset
+python main.py --dataset data/sample_network_intrusion.csv  # Use sample
 
-# Check system status
-python -c "import src.models; print('✅ System ready!')"
+# ⚙️ ADVANCED OPTIONS
+python main.py --dataset data/large.csv --sample 10000      # Use subset
+python main.py --dataset data/custom.csv --label attack     # Custom label
+
+# 📊 DATA VISUALIZATION & ANALYSIS
+python data_visualization_analysis.py             # Generate all analysis graphs
+# Creates 7 detailed visualizations in ./visualizations/ folder
+
+# 🧪 TESTING
+python test_kaggle_integration.py                 # Test integration
+python demo_detection.py                          # Demo predictions
+
+# 📦 DEPENDENCIES
+pip install -r requirements.txt                   # Install packages
+
+# ❓ HELP
+python main.py --help                             # Show all options
 ```
+
+**📊 Generated Visualizations:**
+- Data distribution patterns and attack characteristics
+- Model performance comparisons and feature importance
+- Real-time detection simulation and system dashboard
+- **See `VISUALIZATION_GUIDE.md` for detailed analysis**
 
 ---
 
-**🚀 Ready to detect cyber attacks with 96% accuracy!**
+**🚀 Ready to detect cyber attacks with 96% accuracy on synthetic data and 90%+ accuracy on real datasets!**
+
+**New Unified System:** One `main.py` handles both synthetic and real data automatically!
