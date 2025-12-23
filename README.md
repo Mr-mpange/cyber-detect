@@ -34,7 +34,7 @@ git clone https://github.com/Mr-mpange/cyber-detect.git
 cd cyber-detect
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -r requirements.txt 
 ```
 
 ### **Option 1: Synthetic Data (Default)**
