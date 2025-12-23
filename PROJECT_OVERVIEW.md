@@ -214,7 +214,7 @@ XGBClassifier(
 - ✅ **Feature Importance**: Shows which network features matter most
 - ✅ **Regularization**: Prevents overfitting on training data
 - ✅ **Speed**: Fast training and prediction
-- ✅ **Robustness**: Handles missing values and outliers well
+- ✅ **Robustness**: Handles missing v``alues and outliers well
 - ✅ **Gradient Boosting**: Learns from previous mistakes sequentially
 
 **Performance Results:**
