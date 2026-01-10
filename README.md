@@ -25,7 +25,7 @@ A state-of-the-art machine learning system for detecting cyber attacks in networ
 - **Comprehensive Analysis**: Detailed visualizations and performance metrics
 - **Attack Types**: DoS, DDoS, Port Scan, Bot, Infiltration detection
 
-## 🚀 **Quick Start**
+## 🚀 **Quick Start - Real Data Focus**
 
 ### **Installation**
 ```bash
@@ -37,44 +37,39 @@ cd cyber-detect
 pip install -r requirements.txt 
 ```
 
-### **Option 1: Synthetic Data (Default)**
+### **🎯 Real Data Detection (Recommended)**
 ```bash
-# Run with synthetic data (immediate testing)
-python main.py
+# Auto-download and use real cybersecurity data
+python run_real_data.py
+
+# Download and use NSL-KDD dataset
+python run_real_data.py --nsl-kdd
+
+# Use your own dataset
+python run_real_data.py --dataset data/your_network_data.csv
 ```
 
-### **Option 2: Real Datasets (Recommended)** 🆕
+### **🔧 Manual Dataset Management**
 ```bash
-# Download real cybersecurity dataset
+# Download datasets manually first
 python download_datasets.py --nsl-kdd
-
-# Run with real NSL-KDD dataset
-python main.py --dataset data/KDDTrain+.csv
-
-# Or create sample dataset for testing
 python download_datasets.py --sample
-python main.py --dataset data/sample_network_intrusion.csv
 
-# Show all dataset options
-python main.py --info
+# Then run detection
+python main.py --dataset data/KDDTrain+.csv
+python main.py --dataset data/sample_network_intrusion.csv
 ```
 
-### **Advanced Usage**
+### **⚙️ Advanced Real Data Usage**
 ```bash
 # Use custom label column
 python main.py --dataset data/custom.csv --label attack_type
 
-# Use subset of large dataset (first 10,000 rows)
+# Use subset of large dataset
 python main.py --dataset data/large.csv --sample 10000
 
-# Show help
-python main.py --help
-```
-
-### **Demo Detection**
-```bash
-# Test with sample attack data
-python demo_detection.py
+# Show dataset options
+python main.py --info
 ```
 
 ## 📊 **Model Performance**

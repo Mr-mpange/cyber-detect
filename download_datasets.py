@@ -17,7 +17,7 @@ def create_data_directory():
     """Create data directory if it doesn't exist"""
     if not os.path.exists('data'):
         os.makedirs('data')
-        print("✅ Created data/ directory")
+        print("Created data/ directory")
 
 def download_file(url, filename):
     """
@@ -27,7 +27,7 @@ def download_file(url, filename):
         url: URL to download from
         filename: Local filename to save to
     """
-    print(f"📥 Downloading {filename}...")
+    print(f"Downloading {filename}...")
     
     try:
         response = requests.get(url, stream=True)
@@ -46,11 +46,11 @@ def download_file(url, filename):
                         progress = (downloaded / total_size) * 100
                         print(f"\r   Progress: {progress:.1f}%", end='', flush=True)
         
-        print(f"\n✅ Downloaded {filename} ({downloaded / 1024 / 1024:.1f} MB)")
+        print(f"\nDownloaded {filename} ({downloaded / 1024 / 1024:.1f} MB)")
         return True
         
     except Exception as e:
-        print(f"\n❌ Error downloading {filename}: {e}")
+        print(f"\nError downloading {filename}: {e}")
         return False
 
 def extract_zip(zip_path, extract_to):
@@ -61,21 +61,21 @@ def extract_zip(zip_path, extract_to):
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_to)
         
-        print(f"✅ Extracted to {extract_to}")
+        print(f"Extracted to {extract_to}")
         
         # Remove zip file after extraction
         os.remove(zip_path)
-        print(f"🗑️  Removed {zip_path}")
+        print(f"Removed {zip_path}")
         
         return True
         
     except Exception as e:
-        print(f"❌ Error extracting {zip_path}: {e}")
+        print(f"Error extracting {zip_path}: {e}")
         return False
 
 def download_nsl_kdd():
     """Download NSL-KDD dataset"""
-    print("\n🔹 NSL-KDD Dataset")
+    print("\nNSL-KDD Dataset")
     print("-" * 40)
     
     create_data_directory()
@@ -110,7 +110,7 @@ def download_nsl_kdd():
                 csv_path = local_path.replace('.txt', '.csv')
                 df.to_csv(csv_path, index=False)
                 
-                print(f"✅ Converted to CSV: {csv_path}")
+                print(f"Converted to CSV: {csv_path}")
                 print(f"   Shape: {df.shape}")
                 print(f"   Classes: {df['class'].unique()[:5]}...")
                 
@@ -118,17 +118,17 @@ def download_nsl_kdd():
                 os.remove(local_path)
                 
             except Exception as e:
-                print(f"❌ Error processing {filename}: {e}")
+                print(f"Error processing {filename}: {e}")
 
 def download_sample_datasets():
     """Download sample datasets for testing"""
-    print("\n🔹 Sample Datasets")
+    print("\nSample Datasets")
     print("-" * 40)
     
     create_data_directory()
     
     # Create a sample dataset for immediate testing
-    print("📊 Creating sample cybersecurity dataset...")
+    print("Creating sample cybersecurity dataset...")
     
     import numpy as np
     np.random.seed(42)
@@ -181,13 +181,13 @@ def download_sample_datasets():
     sample_path = 'data/sample_network_intrusion.csv'
     df.to_csv(sample_path, index=False)
     
-    print(f"✅ Created sample dataset: {sample_path}")
+    print(f"Created sample dataset: {sample_path}")
     print(f"   Shape: {df.shape}")
     print(f"   Classes: {df['class'].value_counts().to_dict()}")
 
 def show_dataset_info():
     """Show information about available datasets"""
-    print("\n📊 AVAILABLE CYBERSECURITY DATASETS")
+    print("\nAVAILABLE CYBERSECURITY DATASETS")
     print("="*60)
     
     datasets = {
@@ -210,7 +210,7 @@ def show_dataset_info():
     }
     
     for name, info in datasets.items():
-        print(f"\n🔹 {name}")
+        print(f"\n{name}")
         for key, value in info.items():
             print(f"   {key.title()}: {value}")
     
@@ -234,7 +234,7 @@ def main():
     
     args = parser.parse_args()
     
-    print("🚀 CYBERSECURITY DATASET DOWNLOADER")
+    print("CYBERSECURITY DATASET DOWNLOADER")
     print("="*50)
     
     if args.info or not any(vars(args).values()):
@@ -247,9 +247,9 @@ def main():
     if args.sample:
         download_sample_datasets()
     
-    print(f"\n✅ Dataset download completed!")
-    print(f"📁 Check the 'data/' directory for downloaded files")
-    print(f"🚀 Use with: python main_kaggle.py --dataset data/your_dataset.csv")
+    print(f"\nDataset download completed!")
+    print(f"Check the 'data/' directory for downloaded files")
+    print(f"Use with: python main.py --dataset data/your_dataset.csv")
 
 if __name__ == "__main__":
     main()

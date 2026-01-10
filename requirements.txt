@@ -32,3 +32,6 @@ tensorflow>=2.13.0
 # Optional: Advanced ML
 # lightgbm>=4.0.0
 # catboost>=1.2.0
+
+# Enhanced Features
+# All polynomial and advanced features are included in scikit-learn
