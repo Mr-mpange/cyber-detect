@@ -795,7 +795,7 @@ def create_summary_dashboard(df, output_dir):
 
 def main():
     """Main function to generate all visualizations"""
-    print("🚀 Starting Comprehensive Data Visualization Analysis")
+    print("Starting Comprehensive Data Visualization Analysis")
     print("="*60)
     
     # Create output directory
@@ -805,7 +805,7 @@ def main():
     df = generate_synthetic_data_for_analysis()
     
     # Create all visualizations
-    print("\n📊 Generating visualizations...")
+    print("\nGenerating visualizations...")
     
     plot_data_distribution_overview(df, output_dir)
     plot_attack_pattern_analysis(df, output_dir)
@@ -815,10 +815,10 @@ def main():
     plot_real_time_detection_simulation(output_dir)
     create_summary_dashboard(df, output_dir)
     
-    print("\n🎉 All visualizations completed!")
+    print("\nAll visualizations completed!")
     print("="*60)
-    print(f"📁 Visualizations saved in: ./{output_dir}/")
-    print("\n📋 Generated Files:")
+    print(f"Visualizations saved in: ./{output_dir}/")
+    print("\nGenerated Files:")
     print("1. 01_data_distribution_overview.png - Data patterns and distributions")
     print("2. 02_attack_pattern_analysis.png - Attack characteristics and detection difficulty")
     print("3. 03_feature_engineering_impact.png - Feature engineering effectiveness")
@@ -826,7 +826,7 @@ def main():
     print("5. 05_preprocessing_pipeline.png - Data preprocessing effects")
     print("6. 06_realtime_detection_simulation.png - Real-time detection capabilities")
     print("7. 07_comprehensive_dashboard.png - Complete system overview")
-    print("\n🛡️ Cyber Attack Detection System Analysis Complete!")
+    print("\nCyber Attack Detection System Analysis Complete!")
 
 if __name__ == "__main__":
     main()

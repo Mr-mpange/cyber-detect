@@ -1424,28 +1424,28 @@ def main():
         
         try:
             # Import and run visualization generation
-            print("🎨 Creating comprehensive data visualizations...")
-            result = subprocess.run([sys.executable, 'data_visualization_analysis.py'], 
+            print("Creating comprehensive data visualizations...")
+            result = subprocess.run([sys.executable, 'simple_visualizations.py'], 
                                   capture_output=True, text=True, cwd='.')
             
             if result.returncode == 0:
-                print("✅ Visualizations generated successfully!")
-                print("📁 Visualizations saved in: ./visualizations/")
-                print("📋 Generated Files:")
-                print("   • 01_data_distribution_overview.png - Data patterns and distributions")
-                print("   • 02_attack_pattern_analysis.png - Attack characteristics")
-                print("   • 03_feature_engineering_impact.png - Feature engineering effects")
-                print("   • 04_model_performance_comparison.png - Model accuracy comparisons")
-                print("   • 05_preprocessing_pipeline.png - Data preprocessing pipeline")
-                print("   • 06_realtime_detection_simulation.png - Real-time detection simulation")
-                print("   • 07_comprehensive_dashboard.png - Complete system overview")
+                print("Visualizations generated successfully!")
+                print("Visualizations saved in: ./visualizations/")
+                print("Generated Files:")
+                print("   • 01_data_analysis.png - Data patterns and attack distributions")
+                print("   • 02_model_performance.png - Model accuracy comparisons")
+                print("   • 03_realtime_detection.png - Real-time detection simulation")
+                print("\nOpen any PNG file in the visualizations folder to view the graphs!")
             else:
-                print("⚠️  Visualization generation completed with warnings")
-                print("📁 Check ./visualizations/ folder for generated plots")
+                print("Visualization generation had issues:")
+                if result.stderr:
+                    print(f"   Error: {result.stderr}")
+                print("Check ./visualizations/ folder for any generated plots")
+                print("You can manually run: python simple_visualizations.py")
                 
         except Exception as e:
-            print(f"⚠️  Visualization generation failed: {str(e)}")
-            print("💡 You can manually run: python data_visualization_analysis.py")
+            print(f"Visualization generation failed: {str(e)}")
+            print("You can manually run: python simple_visualizations.py")
         
         return max_accuracy >= 0.90  # Return success status
         
