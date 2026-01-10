@@ -1,8 +1,8 @@
 ====================================================================================================
 🚀 CYBER ATTACK DETECTION SYSTEM - COMPREHENSIVE REPORT
 ====================================================================================================
-📅 Generated: 2026-01-10 16:10:47
-⏱️  Execution Time: 1412.18 seconds
+📅 Generated: 2026-01-10 16:58:17
+⏱️  Execution Time: 1828.75 seconds
 📊 Dataset Type: Custom (Real Data)
 📁 Dataset File: sample_network_intrusion.csv
 📏 Dataset Shape: (5000, 19)
